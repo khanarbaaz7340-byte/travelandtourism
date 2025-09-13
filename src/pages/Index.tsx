@@ -177,7 +177,11 @@ const Index = () => {
                   <transport.icon className="w-12 h-12 mx-auto mb-4 text-primary" />
                   <h3 className="text-xl font-semibold mb-2">{transport.label}</h3>
                   <p className="text-muted-foreground mb-4">{transport.description}</p>
-                  <Button variant="outline" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => navigate('/transport')}
+                  >
                     Book Now
                   </Button>
                 </CardContent>

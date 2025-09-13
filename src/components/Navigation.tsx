@@ -9,7 +9,10 @@ import {
   Menu, 
   X, 
   User,
-  LogOut 
+  LogOut,
+  Plane,
+  DollarSign,
+  AlertTriangle 
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +26,9 @@ const Navigation = () => {
     { href: "/weather-news", label: "Weather & News", icon: CloudSun },
     { href: "/hotels", label: "Hotels", icon: Hotel },
     { href: "/places", label: "Tourist Places", icon: MapPin },
+    { href: "/transport", label: "Transport", icon: Plane },
+    { href: "/expense-tracker", label: "Expenses", icon: DollarSign },
+    { href: "/emergency", label: "Emergency", icon: AlertTriangle },
   ];
 
   const handleAuthClick = () => {
