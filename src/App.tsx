@@ -12,6 +12,7 @@ import TouristPlaces from "./pages/TouristPlaces";
 import Transport from "./pages/Transport";
 import ExpenseTracker from "./pages/ExpenseTracker";
 import Emergency from "./pages/Emergency";
+import SmartTravelAssistant from "./pages/SmartTravelAssistant";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/transport" element={<Layout><Transport /></Layout>} />
           <Route path="/expense-tracker" element={<Layout><ExpenseTracker /></Layout>} />
           <Route path="/emergency" element={<Layout><Emergency /></Layout>} />
+          <Route path="/smart-travel" element={<Layout><SmartTravelAssistant /></Layout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

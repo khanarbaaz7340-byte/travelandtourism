@@ -22,6 +22,7 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const navigationItems = [
+    { href: "/smart-travel", label: "Smart Travel", icon: Bot },
     { href: "/ai-assistant", label: "AI Assistant", icon: Bot },
     { href: "/weather-news", label: "Weather & News", icon: CloudSun },
     { href: "/hotels", label: "Hotels", icon: Hotel },
