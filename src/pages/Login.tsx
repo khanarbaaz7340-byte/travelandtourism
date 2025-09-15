@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import { 
   User, 
   Mail, 
@@ -19,8 +20,16 @@ import {
 
 const Login = () => {
   const navigate = useNavigate();
+  const { user, signIn, signUp } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
   
   const [loginForm, setLoginForm] = useState({
     email: "",
@@ -40,15 +49,23 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    const { error } = await signIn(loginForm.email, loginForm.password);
+    
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Login Failed",
+        description: error.message,
+      });
+    } else {
       toast({
         title: "Welcome back!",
         description: "You have successfully logged in.",
       });
-      setIsLoading(false);
       navigate("/");
-    }, 1500);
+    }
+    
+    setIsLoading(false);
   };
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -65,15 +82,30 @@ const Login = () => {
 
     setIsLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    const { error } = await signUp(
+      signupForm.email, 
+      signupForm.password,
+      {
+        full_name: signupForm.fullName,
+        mobile: signupForm.mobile,
+        location: signupForm.location
+      }
+    );
+    
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Signup Failed",
+        description: error.message,
+      });
+    } else {
       toast({
         title: "Account Created!",
-        description: "Welcome to TravelSmart! Your account has been created successfully.",
+        description: "Welcome to TravelSmart! Please check your email to verify your account.",
       });
-      setIsLoading(false);
-      navigate("/");
-    }, 1500);
+    }
+    
+    setIsLoading(false);
   };
 
   return (
