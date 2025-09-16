@@ -3,6 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-travel.jpg";
+import tajMahalImage from "@/assets/taj-mahal.jpg";
+import goaBeachImage from "@/assets/goa-beach.jpg";
+import mysorePalaceImage from "@/assets/mysore-palace.jpg";
+import manaliValleyImage from "@/assets/manali-valley.jpg";
+import keralaBackwatersImage from "@/assets/kerala-backwaters.jpg";
+import jaipurPalaceImage from "@/assets/jaipur-palace.jpg";
+import luxuryHotel1Image from "@/assets/luxury-hotel-1.jpg";
+import luxuryHotel2Image from "@/assets/luxury-hotel-2.jpg";
 import { 
   Bot, 
   CloudSun, 
@@ -15,7 +23,10 @@ import {
   Car,
   Shield,
   Clock,
-  Users
+  Users,
+  MessageCircle,
+  Heart,
+  Camera
 } from "lucide-react";
 
 const Index = () => {
@@ -53,10 +64,96 @@ const Index = () => {
   ];
 
   const stats = [
-    { icon: Users, label: "Happy Travelers", value: "1M+" },
-    { icon: MapPin, label: "Destinations", value: "500+" },
-    { icon: Hotel, label: "Hotel Partners", value: "10K+" },
-    { icon: Star, label: "Average Rating", value: "4.8" }
+    { 
+      icon: Users, 
+      label: "Happy Travelers", 
+      value: "1.2M+",
+      description: "Satisfied customers worldwide",
+      details: "Join millions who trust us"
+    },
+    { 
+      icon: MapPin, 
+      label: "Destinations", 
+      value: "650+",
+      description: "Cities & tourist spots covered",
+      details: "From mountains to beaches"
+    },
+    { 
+      icon: Hotel, 
+      label: "Hotel Partners", 
+      value: "15K+",
+      description: "Premium hotels worldwide",
+      details: "Luxury to budget options"
+    },
+    { 
+      icon: Star, 
+      label: "Average Rating", 
+      value: "4.9/5",
+      description: "Based on 50K+ reviews",
+      details: '"Amazing service!" - Sarah K.'
+    }
+  ];
+
+  const touristPlaces = [
+    {
+      name: "Taj Mahal",
+      location: "Agra, India",
+      image: tajMahalImage,
+      rating: 4.9,
+      reviews: 25000
+    },
+    {
+      name: "Goa Beaches",
+      location: "Goa, India", 
+      image: goaBeachImage,
+      rating: 4.7,
+      reviews: 18500
+    },
+    {
+      name: "Mysore Palace",
+      location: "Mysore, India",
+      image: mysorePalaceImage,
+      rating: 4.8,
+      reviews: 12000
+    },
+    {
+      name: "Manali Valley",
+      location: "Himachal Pradesh, India",
+      image: manaliValleyImage,
+      rating: 4.6,
+      reviews: 15000
+    },
+    {
+      name: "Kerala Backwaters",
+      location: "Kerala, India",
+      image: keralaBackwatersImage,
+      rating: 4.8,
+      reviews: 20000
+    },
+    {
+      name: "Jaipur City Palace",
+      location: "Rajasthan, India",
+      image: jaipurPalaceImage,
+      rating: 4.7,
+      reviews: 16000
+    }
+  ];
+
+  const featuredHotels = [
+    {
+      name: "The Oberoi Rajvilas",
+      location: "Jaipur",
+      image: luxuryHotel1Image,
+      rating: 4.9,
+      price: "₹25,000/night"
+    },
+    {
+      name: "Taj Lake Palace",
+      location: "Udaipur",
+      image: luxuryHotel2Image,
+      rating: 4.8,
+      price: "₹35,000/night"
+    }
   ];
 
   const transportOptions = [
@@ -196,10 +293,12 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {stats.map((stat) => (
-              <div key={stat.label} className="space-y-2">
+              <div key={stat.label} className="space-y-3">
                 <stat.icon className="w-12 h-12 mx-auto text-primary" />
                 <div className="text-4xl font-bold text-primary">{stat.value}</div>
-                <div className="text-lg text-muted-foreground">{stat.label}</div>
+                <div className="text-lg font-medium">{stat.label}</div>
+                <div className="text-sm text-muted-foreground">{stat.description}</div>
+                <div className="text-xs text-muted-foreground italic">{stat.details}</div>
               </div>
             ))}
           </div>
@@ -220,12 +319,122 @@ const Index = () => {
             </div>
             <div className="flex items-center gap-3 justify-center">
               <Clock className="w-6 h-6 text-success" />
-              <span className="font-medium">24/7 Support</span>
+              <div className="text-center">
+                <span className="font-medium block">24/7 Support</span>
+                <span className="text-sm text-muted-foreground">Live chat & phone support</span>
+              </div>
             </div>
             <div className="flex items-center gap-3 justify-center">
               <Star className="w-6 h-6 text-success" />
-              <span className="font-medium">Best Price Guarantee</span>
+              <div className="text-center">
+                <span className="font-medium block">Best Price Guarantee</span>
+                <span className="text-sm text-muted-foreground">Match any competitor price</span>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Destinations */}
+      <section className="py-20 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold hero-text mb-4">Explore India's Iconic Destinations</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Discover the most beautiful and culturally rich destinations across India
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {touristPlaces.map((place) => (
+              <Card 
+                key={place.name}
+                className="travel-shadow hover:travel-shadow-hover transition-smooth cursor-pointer overflow-hidden group"
+                onClick={() => navigate('/places')}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={place.image} 
+                    alt={place.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-smooth"
+                  />
+                  <div className="absolute top-4 right-4 bg-white/90 px-2 py-1 rounded-full flex items-center gap-1">
+                    <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                    <span className="text-sm font-medium">{place.rating}</span>
+                  </div>
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{place.name}</h3>
+                  <p className="text-muted-foreground mb-4 flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    {place.location}
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <MessageCircle className="w-4 h-4" />
+                      {place.reviews.toLocaleString()} reviews
+                    </div>
+                    <Button size="sm" variant="outline">
+                      <Camera className="w-4 h-4 mr-2" />
+                      View Gallery
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Hotels */}
+      <section className="py-20 px-4 md:px-8 bg-muted/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold hero-text mb-4">Luxury Hotel Partners</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Experience world-class hospitality at our premium partner hotels
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {featuredHotels.map((hotel) => (
+              <Card 
+                key={hotel.name}
+                className="travel-shadow hover:travel-shadow-hover transition-smooth cursor-pointer overflow-hidden group"
+                onClick={() => navigate('/hotels')}
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img 
+                    src={hotel.image} 
+                    alt={hotel.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-smooth"
+                  />
+                  <div className="absolute top-4 right-4 bg-white/90 px-3 py-2 rounded-lg">
+                    <div className="flex items-center gap-1 mb-1">
+                      <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                      <span className="text-sm font-bold">{hotel.rating}</span>
+                    </div>
+                    <div className="text-sm font-medium text-primary">{hotel.price}</div>
+                  </div>
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">{hotel.name}</h3>
+                  <p className="text-muted-foreground mb-4 flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    {hotel.location}
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Heart className="w-4 h-4 text-red-500" />
+                      <span className="text-sm text-muted-foreground">Luxury Collection</span>
+                    </div>
+                    <Button>
+                      Book Now
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
