@@ -213,7 +213,10 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="flex items-center gap-3 justify-center">
               <Shield className="w-6 h-6 text-success" />
-              <span className="font-medium">Secure & Safe</span>
+              <div className="text-center">
+                <span className="font-medium block">Secure & Safe</span>
+                <span className="text-sm text-muted-foreground">SSL Encrypted | PCI Compliant</span>
+              </div>
             </div>
             <div className="flex items-center gap-3 justify-center">
               <Clock className="w-6 h-6 text-success" />
@@ -244,8 +247,7 @@ const Index = () => {
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="border-white text-white hover:bg-white/20 px-8"
+              className="bg-white text-secondary hover:bg-gray-100 px-8"
               onClick={() => navigate('/ai-assistant')}
             >
               Try AI Assistant
