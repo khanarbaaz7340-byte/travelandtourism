@@ -16,6 +16,14 @@ import {
   Users
 } from "lucide-react";
 
+// Hotel Images
+import royalPalaceHotel from "@/assets/royal-palace-heritage-hotel.jpg";
+import beachsideResort from "@/assets/beachside-resort-spa.jpg";
+import mountainViewLodge from "@/assets/mountain-view-lodge.jpg";
+import backwaterResort from "@/assets/backwater-paradise-resort.jpg";
+import businessCityHotel from "@/assets/business-city-hotel.jpg";
+import desertCampResort from "@/assets/desert-camp-resort.jpg";
+
 const Hotels = () => {
   const [searchQuery, setSearchQuery] = useState("");
   
@@ -26,7 +34,7 @@ const Hotels = () => {
       location: "Udaipur, Rajasthan",
       rating: 4.8,
       price: "₹8,500",
-      image: "🏰",
+      image: royalPalaceHotel,
       amenities: ["Wifi", "Pool", "Restaurant", "Parking"],
       description: "Experience royal luxury in this converted palace with stunning lake views."
     },
@@ -36,7 +44,7 @@ const Hotels = () => {
       location: "Goa",
       rating: 4.6,
       price: "₹6,200",
-      image: "🏖️",
+      image: beachsideResort,
       amenities: ["Wifi", "Beach", "Spa", "Restaurant"],
       description: "Relax at this beautiful beachfront resort with world-class amenities."
     },
@@ -46,7 +54,7 @@ const Hotels = () => {
       location: "Manali, Himachal Pradesh",
       rating: 4.5,
       price: "₹4,800",
-      image: "🏔️",
+      image: mountainViewLodge,
       amenities: ["Wifi", "Mountain View", "Restaurant", "Adventure"],
       description: "Cozy mountain retreat perfect for adventure enthusiasts and nature lovers."
     },
@@ -56,7 +64,7 @@ const Hotels = () => {
       location: "Alleppey, Kerala",
       rating: 4.7,
       price: "₹7,200",
-      image: "🌴",
+      image: backwaterResort,
       amenities: ["Wifi", "Backwater", "Ayurveda", "Boat"],
       description: "Traditional Kerala houseboat experience with modern luxury amenities."
     },
@@ -66,7 +74,7 @@ const Hotels = () => {
       location: "Mumbai, Maharashtra",
       rating: 4.3,
       price: "₹5,500",
-      image: "🏢",
+      image: businessCityHotel,
       amenities: ["Wifi", "Business Center", "Gym", "Restaurant"],
       description: "Modern business hotel in the heart of Mumbai's financial district."
     },
@@ -76,7 +84,7 @@ const Hotels = () => {
       location: "Jaisalmer, Rajasthan",
       rating: 4.4,
       price: "₹3,800",
-      image: "🐪",
+      image: desertCampResort,
       amenities: ["Desert Safari", "Cultural Show", "Camping", "Restaurant"],
       description: "Authentic desert camping experience under the stars with camel safaris."
     }
@@ -164,8 +172,12 @@ const Hotels = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {hotelData.map((hotel) => (
             <Card key={hotel.id} className="travel-shadow hover:travel-shadow-hover transition-smooth cursor-pointer overflow-hidden">
-              <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center text-6xl">
-                {hotel.image}
+              <div className="aspect-video overflow-hidden">
+                <img 
+                  src={hotel.image} 
+                  alt={hotel.name}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
               </div>
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between gap-2">

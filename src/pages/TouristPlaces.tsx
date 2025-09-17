@@ -14,6 +14,14 @@ import {
   Share
 } from "lucide-react";
 
+// Tourist Place Images
+import tajMahalImage from "@/assets/taj-mahal.jpg";
+import goaBeachImage from "@/assets/goa-beach.jpg";
+import keralaBackwatersImage from "@/assets/kerala-backwaters.jpg";
+import jaipurPalaceImage from "@/assets/jaipur-palace.jpg";
+import manaliValleyImage from "@/assets/manali-valley.jpg";
+import mysorePalaceImage from "@/assets/mysore-palace.jpg";
+
 const TouristPlaces = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState<number[]>([]);
@@ -27,7 +35,7 @@ const TouristPlaces = () => {
       category: "Heritage",
       timings: "6:00 AM - 7:00 PM",
       entryFee: "₹250",
-      image: "🕌",
+      image: tajMahalImage,
       description: "One of the Seven Wonders of the World, this ivory-white marble mausoleum is a symbol of eternal love.",
       highlights: ["Architecture", "History", "Photography", "UNESCO Site"],
       bestTime: "October to March"
@@ -40,7 +48,7 @@ const TouristPlaces = () => {
       category: "Beach",
       timings: "24 Hours",
       entryFee: "Free",
-      image: "🏖️",
+      image: goaBeachImage,
       description: "Stunning coastline with golden sand beaches, water sports, and vibrant nightlife.",
       highlights: ["Beach Activities", "Water Sports", "Nightlife", "Seafood"],
       bestTime: "November to February"
@@ -53,7 +61,7 @@ const TouristPlaces = () => {
       category: "Nature",
       timings: "24 Hours",
       entryFee: "₹500",
-      image: "🌴",
+      image: keralaBackwatersImage,
       description: "Serene network of lagoons and lakes, perfect for houseboat cruises and bird watching.",
       highlights: ["Houseboat", "Wildlife", "Photography", "Peace"],
       bestTime: "September to March"
@@ -66,7 +74,7 @@ const TouristPlaces = () => {
       category: "Heritage",
       timings: "9:30 AM - 5:00 PM",
       entryFee: "₹700",
-      image: "🏰",
+      image: jaipurPalaceImage,
       description: "Magnificent palace complex showcasing Rajput and Mughal architecture with museums and courtyards.",
       highlights: ["Royal Architecture", "Museums", "Culture", "Art"],
       bestTime: "October to March"
@@ -79,7 +87,7 @@ const TouristPlaces = () => {
       category: "Adventure",
       timings: "24 Hours",
       entryFee: "Free",
-      image: "🏔️",
+      image: manaliValleyImage,
       description: "Beautiful hill station with snow-capped peaks, adventure sports, and scenic landscapes.",
       highlights: ["Trekking", "Skiing", "Mountain Views", "Adventure"],
       bestTime: "May to October"
@@ -92,7 +100,7 @@ const TouristPlaces = () => {
       category: "Heritage",
       timings: "10:00 AM - 5:30 PM",
       entryFee: "₹70",
-      image: "👑",
+      image: mysorePalaceImage,
       description: "Grand palace known for its Indo-Saracenic architecture and spectacular illumination.",
       highlights: ["Architecture", "Light Show", "History", "Gardens"],
       bestTime: "October to February"
@@ -157,8 +165,12 @@ const TouristPlaces = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {placesData.map((place) => (
             <Card key={place.id} className="travel-shadow hover:travel-shadow-hover transition-smooth overflow-hidden">
-              <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center text-6xl relative">
-                {place.image}
+              <div className="aspect-video overflow-hidden relative">
+                <img 
+                  src={place.image} 
+                  alt={place.name}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
                 <div className="absolute top-3 right-3 flex gap-2">
                   <Button 
                     size="sm" 
