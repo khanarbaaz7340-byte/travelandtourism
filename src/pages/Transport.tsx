@@ -19,6 +19,14 @@ import {
   Users
 } from "lucide-react";
 
+// Import transport images
+import airIndiaPlane from "@/assets/air-india-plane.jpg";
+import indigoPlane from "@/assets/indigo-plane.jpg";
+import spicejetPlane from "@/assets/spicejet-plane.jpg";
+import rajdhaniExpress from "@/assets/rajdhani-express.jpg";
+import olaCab from "@/assets/ola-cab.jpg";
+import uberTaxi from "@/assets/uber-taxi.jpg";
+
 const Transport = () => {
   const [searchData, setSearchData] = useState({
     from: "",
@@ -40,7 +48,8 @@ const Transport = () => {
       duration: "2h 15m",
       price: 4500,
       stops: "Non-stop",
-      rating: 4.2
+      rating: 4.2,
+      image: indigoPlane
     },
     {
       id: 2,
@@ -53,7 +62,8 @@ const Transport = () => {
       duration: "2h 25m", 
       price: 5200,
       stops: "Non-stop",
-      rating: 4.0
+      rating: 4.0,
+      image: airIndiaPlane
     },
     {
       id: 3,
@@ -66,7 +76,8 @@ const Transport = () => {
       duration: "2h 35m",
       price: 3900,
       stops: "Non-stop",
-      rating: 3.8
+      rating: 3.8,
+      image: spicejetPlane
     }
   ];
 
@@ -82,7 +93,8 @@ const Transport = () => {
       duration: "15h 40m",
       price: 3200,
       class: "3A",
-      availability: "Available"
+      availability: "Available",
+      image: rajdhaniExpress
     },
     {
       id: 2,
@@ -95,7 +107,8 @@ const Transport = () => {
       duration: "15h 55m",
       price: 3400,
       class: "2A", 
-      availability: "Waiting List"
+      availability: "Waiting List",
+      image: rajdhaniExpress
     },
     {
       id: 3,
@@ -108,7 +121,8 @@ const Transport = () => {
       duration: "15h 25m",
       price: 2800,
       class: "SL",
-      availability: "Available"
+      availability: "Available",
+      image: rajdhaniExpress
     }
   ];
 
@@ -120,7 +134,8 @@ const Transport = () => {
       estimatedTime: "5 min",
       price: 180,
       rating: 4.5,
-      features: ["AC", "4 Seats"]
+      features: ["AC", "4 Seats"],
+      image: uberTaxi
     },
     {
       id: 2,
@@ -129,7 +144,8 @@ const Transport = () => {
       estimatedTime: "3 min",
       price: 220,
       rating: 4.3,
-      features: ["AC", "4 Seats", "Premium"]
+      features: ["AC", "4 Seats", "Premium"],
+      image: olaCab
     },
     {
       id: 3,
@@ -138,7 +154,8 @@ const Transport = () => {
       estimatedTime: "7 min", 
       price: 280,
       rating: 4.4,
-      features: ["AC", "6 Seats", "Spacious"]
+      features: ["AC", "6 Seats", "Spacious"],
+      image: uberTaxi
     }
   ];
 
@@ -233,15 +250,21 @@ const Transport = () => {
                 <Card key={flight.id} className="travel-shadow hover:travel-shadow-hover transition-smooth">
                   <CardContent className="p-6">
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-4 mb-2">
-                          <h3 className="text-lg font-semibold">{flight.airline}</h3>
-                          <Badge variant="outline">{flight.flightNumber}</Badge>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm">{flight.rating}</span>
+                      <div className="flex items-center gap-4">
+                        <img 
+                          src={flight.image} 
+                          alt={`${flight.airline} aircraft`}
+                          className="w-16 h-12 object-cover rounded-lg"
+                        />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-4 mb-2">
+                            <h3 className="text-lg font-semibold">{flight.airline}</h3>
+                            <Badge variant="outline">{flight.flightNumber}</Badge>
+                            <div className="flex items-center gap-1">
+                              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                              <span className="text-sm">{flight.rating}</span>
+                            </div>
                           </div>
-                        </div>
                         <div className="flex items-center gap-6 text-sm text-muted-foreground">
                           <div className="flex items-center gap-2">
                             <MapPin className="w-4 h-4" />
@@ -253,6 +276,7 @@ const Transport = () => {
                           </div>
                           <span>{flight.duration}</span>
                           <Badge variant="secondary">{flight.stops}</Badge>
+                          </div>
                         </div>
                       </div>
                       <div className="text-right">
@@ -278,14 +302,20 @@ const Transport = () => {
                 <Card key={train.id} className="travel-shadow hover:travel-shadow-hover transition-smooth">
                   <CardContent className="p-6">
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-4 mb-2">
-                          <h3 className="text-lg font-semibold">{train.name}</h3>
-                          <Badge variant="outline">{train.number}</Badge>
-                          <Badge variant={train.availability === "Available" ? "default" : "secondary"}>
-                            {train.availability}
-                          </Badge>
-                        </div>
+                      <div className="flex items-center gap-4">
+                        <img 
+                          src={train.image} 
+                          alt={`${train.name} train`}
+                          className="w-16 h-12 object-cover rounded-lg"
+                        />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-4 mb-2">
+                            <h3 className="text-lg font-semibold">{train.name}</h3>
+                            <Badge variant="outline">{train.number}</Badge>
+                            <Badge variant={train.availability === "Available" ? "default" : "secondary"}>
+                              {train.availability}
+                            </Badge>
+                          </div>
                         <div className="flex items-center gap-6 text-sm text-muted-foreground">
                           <div className="flex items-center gap-2">
                             <MapPin className="w-4 h-4" />
@@ -297,6 +327,7 @@ const Transport = () => {
                           </div>
                           <span>{train.duration}</span>
                           <Badge variant="outline">{train.class}</Badge>
+                          </div>
                         </div>
                       </div>
                       <div className="text-right">
@@ -325,15 +356,21 @@ const Transport = () => {
                 <Card key={cab.id} className="travel-shadow hover:travel-shadow-hover transition-smooth">
                   <CardContent className="p-6">
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-4 mb-2">
-                          <h3 className="text-lg font-semibold">{cab.provider}</h3>
-                          <Badge variant="outline">{cab.carType}</Badge>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm">{cab.rating}</span>
+                      <div className="flex items-center gap-4">
+                        <img 
+                          src={cab.image} 
+                          alt={`${cab.provider} ${cab.carType}`}
+                          className="w-16 h-12 object-cover rounded-lg"
+                        />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-4 mb-2">
+                            <h3 className="text-lg font-semibold">{cab.provider}</h3>
+                            <Badge variant="outline">{cab.carType}</Badge>
+                            <div className="flex items-center gap-1">
+                              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                              <span className="text-sm">{cab.rating}</span>
+                            </div>
                           </div>
-                        </div>
                         <div className="flex items-center gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-2">
                             <Clock className="w-4 h-4" />
@@ -345,6 +382,7 @@ const Transport = () => {
                                 {feature}
                               </Badge>
                             ))}
+                          </div>
                           </div>
                         </div>
                       </div>

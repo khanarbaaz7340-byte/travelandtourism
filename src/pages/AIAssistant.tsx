@@ -28,24 +28,59 @@ const AIAssistant = () => {
   const { toast } = useToast();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  // User context for personalized recommendations
+  // Enhanced user context for advanced personalization
   const [userContext, setUserContext] = useState({
     budget: '',
     preferences: '',
     travelStyle: '',
-    location: ''
+    location: '',
+    weatherConditions: '',
+    timeZone: '',
+    behaviorPattern: {
+      queryTypes: [] as string[],
+      responsePreferences: 'detailed',
+      interactionCount: 0
+    }
   });
 
   useEffect(() => {
-    // Get user location for context-aware recommendations
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setUserContext(prev => ({
-          ...prev,
-          location: `${position.coords.latitude},${position.coords.longitude}`
-        }));
-      });
-    }
+    // Enhanced context gathering for ML-like personalization
+    const gatherEnhancedContext = async () => {
+      // Get precise location data
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const coords = `${position.coords.latitude},${position.coords.longitude}`;
+            setUserContext(prev => ({
+              ...prev,
+              location: coords,
+              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            }));
+          },
+          (error) => {
+            console.log('Location access denied:', error);
+            // Fallback to IP-based location or timezone
+            setUserContext(prev => ({
+              ...prev,
+              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            }));
+          }
+        );
+      }
+
+      // Gather device and browser context
+      const deviceContext = {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        screenSize: `${screen.width}x${screen.height}`,
+        connectionType: (navigator as any).connection?.effectiveType || 'unknown'
+      };
+
+      console.log('Device context gathered:', deviceContext);
+    };
+
+    gatherEnhancedContext();
   }, []);
 
   useEffect(() => {
@@ -57,28 +92,96 @@ const AIAssistant = () => {
 
   const getAIResponse = async (userMessage: string) => {
     try {
+      // Enhanced context with behavioral patterns and real-time data
+      const enhancedContext = {
+        conversationHistory: messages.slice(-5),
+        userPreferences: {
+          ...userContext,
+          behaviorPattern: {
+            ...userContext.behaviorPattern,
+            queryTypes: [...userContext.behaviorPattern.queryTypes, categorizeQuery(userMessage)],
+            interactionCount: userContext.behaviorPattern.interactionCount + 1
+          }
+        },
+        requestType: 'travel_assistance',
+        sessionData: {
+          sessionStart: new Date().toISOString(),
+          messageCount: messages.length,
+          responseTime: Date.now(),
+          userEngagement: calculateEngagementScore()
+        },
+        realTimeFactors: {
+          currentTime: new Date().toISOString(),
+          deviceType: getDeviceType(),
+          connectionQuality: getConnectionQuality()
+        }
+      };
+
       const { data, error } = await supabase.functions.invoke('enhanced-ai-assistant', {
         body: { 
           message: userMessage,
-          context: {
-            conversationHistory: messages.slice(-5), // Last 5 messages for context
-            userPreferences: userContext,
-            requestType: 'travel_assistance'
-          }
+          context: enhancedContext
         }
       });
 
       if (error) throw error;
+      
+      // Update user context with learned preferences
+      updateLearningProfile(userMessage, data.response);
+      
       return data.response;
     } catch (error) {
       console.error('Error getting AI response:', error);
       toast({
-        title: "Error",
+        title: "AI Assistant Error",
         description: "Failed to get AI response. Please try again.",
         variant: "destructive",
       });
-      return "I apologize, but I'm having trouble processing your request right now. Please try again in a moment.";
+      return "I apologize, but I'm experiencing technical difficulties. Let me try to help you with a simplified response. Please try asking your question again, and I'll do my best to assist you.";
     }
+  };
+
+  // Helper functions for enhanced AI context
+  const categorizeQuery = (message: string): string => {
+    const lowerMessage = message.toLowerCase();
+    if (lowerMessage.includes('hotel') || lowerMessage.includes('accommodation')) return 'accommodation';
+    if (lowerMessage.includes('flight') || lowerMessage.includes('transport')) return 'transportation';
+    if (lowerMessage.includes('food') || lowerMessage.includes('restaurant')) return 'dining';
+    if (lowerMessage.includes('weather') || lowerMessage.includes('climate')) return 'weather';
+    if (lowerMessage.includes('budget') || lowerMessage.includes('cost')) return 'budget';
+    if (lowerMessage.includes('culture') || lowerMessage.includes('tradition')) return 'cultural';
+    return 'general';
+  };
+
+  const calculateEngagementScore = (): number => {
+    const messageCount = messages.length;
+    const avgMessageLength = messages.reduce((sum, msg) => sum + msg.content.length, 0) / messageCount || 0;
+    return Math.min(100, (messageCount * 10) + (avgMessageLength / 10));
+  };
+
+  const getDeviceType = (): string => {
+    const userAgent = navigator.userAgent;
+    if (/tablet|ipad|playbook|silk/i.test(userAgent)) return 'tablet';
+    if (/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile/i.test(userAgent)) return 'mobile';
+    return 'desktop';
+  };
+
+  const getConnectionQuality = (): string => {
+    const connection = (navigator as any).connection;
+    if (!connection) return 'unknown';
+    return connection.effectiveType || 'unknown';
+  };
+
+  const updateLearningProfile = (query: string, response: string) => {
+    // Update user preferences based on interaction patterns
+    setUserContext(prev => ({
+      ...prev,
+      behaviorPattern: {
+        ...prev.behaviorPattern,
+        responsePreferences: response.length > 500 ? 'detailed' : 'concise',
+        interactionCount: prev.behaviorPattern.interactionCount + 1
+      }
+    }));
   };
 
   const handleSendMessage = async () => {
