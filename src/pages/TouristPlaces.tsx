@@ -34,11 +34,16 @@ const TouristPlaces = () => {
       rating: 4.9,
       category: "Heritage",
       timings: "6:00 AM - 7:00 PM",
-      entryFee: "₹250",
+      entryFee: "₹250 (Indians), ₹1300 (Foreigners)",
       image: tajMahalImage,
-      description: "One of the Seven Wonders of the World, this ivory-white marble mausoleum is a symbol of eternal love.",
-      highlights: ["Architecture", "History", "Photography", "UNESCO Site"],
-      bestTime: "October to March"
+      description: "One of the Seven Wonders of the World, this ivory-white marble mausoleum was built by Emperor Shah Jahan in memory of his beloved wife Mumtaz Mahal. A UNESCO World Heritage Site and symbol of eternal love.",
+      highlights: ["Mughal Architecture", "UNESCO World Heritage", "Photography Spot", "Historical Monument", "Marble Craftsmanship"],
+      bestTime: "October to March",
+      nearbyAttractions: ["Agra Fort", "Mehtab Bagh", "Itmad-ud-Daulah"],
+      duration: "2-3 hours",
+      accessibility: "Wheelchair accessible",
+      languages: ["Hindi", "English", "Urdu"],
+      specialNotes: "Closed on Fridays for prayers. Full moon nights offer special viewing."
     },
     {
       id: 2,
@@ -47,11 +52,16 @@ const TouristPlaces = () => {
       rating: 4.7,
       category: "Beach",
       timings: "24 Hours",
-      entryFee: "Free",
+      entryFee: "Free (Beach access)",
       image: goaBeachImage,
-      description: "Stunning coastline with golden sand beaches, water sports, and vibrant nightlife.",
-      highlights: ["Beach Activities", "Water Sports", "Nightlife", "Seafood"],
-      bestTime: "November to February"
+      description: "Goa's stunning coastline features pristine beaches with golden sand, swaying palm trees, vibrant shacks, and exciting water sports. From party beaches like Baga to serene spots like Palolem.",
+      highlights: ["Water Sports", "Beach Parties", "Seafood Cuisine", "Sunset Views", "Portuguese Heritage", "Nightlife"],
+      bestTime: "November to February",
+      nearbyAttractions: ["Basilica of Bom Jesus", "Dudhsagar Falls", "Spice Plantations"],
+      duration: "3-7 days",
+      accessibility: "Beach wheelchairs available at select locations",
+      languages: ["English", "Hindi", "Konkani", "Portuguese"],
+      specialNotes: "Monsoon season (June-September) has rough seas. Night swimming not recommended."
     },
     {
       id: 3,
@@ -59,12 +69,17 @@ const TouristPlaces = () => {
       location: "Alleppey, Kerala",
       rating: 4.8,
       category: "Nature",
-      timings: "24 Hours",
-      entryFee: "₹500",
+      timings: "24 Hours (Houseboat cruises start 12 PM)",
+      entryFee: "₹500-₹15,000 (depending on houseboat package)",
       image: keralaBackwatersImage,
-      description: "Serene network of lagoons and lakes, perfect for houseboat cruises and bird watching.",
-      highlights: ["Houseboat", "Wildlife", "Photography", "Peace"],
-      bestTime: "September to March"
+      description: "A network of interconnected canals, rivers, lakes and inlets forming a labyrinthine waterway. Experience traditional houseboat cruises through coconut groves, paddy fields, and traditional villages.",
+      highlights: ["Houseboat Cruises", "Bird Watching", "Traditional Villages", "Coconut Groves", "Ayurvedic Spas", "Local Cuisine"],
+      bestTime: "September to March",
+      nearbyAttractions: ["Kumarakom Bird Sanctuary", "Vembanad Lake", "Chinese Fishing Nets"],
+      duration: "1-3 days",
+      accessibility: "Limited wheelchair access on houseboats",
+      languages: ["Malayalam", "English", "Hindi", "Tamil"],
+      specialNotes: "Advance booking required for houseboats. Mosquito repellent recommended."
     },
     {
       id: 4,
@@ -73,11 +88,16 @@ const TouristPlaces = () => {
       rating: 4.6,
       category: "Heritage",
       timings: "9:30 AM - 5:00 PM",
-      entryFee: "₹700",
+      entryFee: "₹700 (Indians), ₹2500 (Foreigners)",
       image: jaipurPalaceImage,
-      description: "Magnificent palace complex showcasing Rajput and Mughal architecture with museums and courtyards.",
-      highlights: ["Royal Architecture", "Museums", "Culture", "Art"],
-      bestTime: "October to March"
+      description: "A magnificent palace complex built by Maharaja Sawai Jai Singh II, showcasing a perfect blend of Rajput and Mughal architecture. Houses museums displaying royal artifacts, textiles, and weapons.",
+      highlights: ["Rajput Architecture", "Royal Museums", "Peacock Gate", "Crystal Gallery", "Textile Collection", "Weapon Display"],
+      bestTime: "October to March",
+      nearbyAttractions: ["Hawa Mahal", "Jantar Mantar", "Amber Fort"],
+      duration: "2-3 hours",
+      accessibility: "Partially wheelchair accessible",
+      languages: ["Hindi", "English", "Rajasthani"],
+      specialNotes: "Audio guides available in multiple languages. Photography charges apply for cameras."
     },
     {
       id: 5,
@@ -86,11 +106,16 @@ const TouristPlaces = () => {
       rating: 4.5,
       category: "Adventure",
       timings: "24 Hours",
-      entryFee: "Free",
+      entryFee: "Free (Activity charges vary)",
       image: manaliValleyImage,
-      description: "Beautiful hill station with snow-capped peaks, adventure sports, and scenic landscapes.",
-      highlights: ["Trekking", "Skiing", "Mountain Views", "Adventure"],
-      bestTime: "May to October"
+      description: "Nestled in the Beas River valley, Manali is a popular hill station offering breathtaking mountain views, adventure activities, and a perfect escape from the plains. Gateway to Lahaul-Spiti and Ladakh.",
+      highlights: ["Trekking", "River Rafting", "Paragliding", "Skiing", "Mountain Biking", "Hot Springs"],
+      bestTime: "March to June, October to February",
+      nearbyAttractions: ["Rohtang Pass", "Solang Valley", "Hadimba Temple"],
+      duration: "3-5 days",
+      accessibility: "Limited accessibility in mountain areas",
+      languages: ["Hindi", "English", "Himachali"],
+      specialNotes: "Inner line permits required for certain areas. Weather can change quickly in mountains."
     },
     {
       id: 6,
@@ -99,11 +124,16 @@ const TouristPlaces = () => {
       rating: 4.7,
       category: "Heritage",
       timings: "10:00 AM - 5:30 PM",
-      entryFee: "₹70",
+      entryFee: "₹70 (Indians), ₹200 (Foreigners)",
       image: mysorePalaceImage,
-      description: "Grand palace known for its Indo-Saracenic architecture and spectacular illumination.",
-      highlights: ["Architecture", "Light Show", "History", "Gardens"],
-      bestTime: "October to February"
+      description: "The official residence of the Wadiyar dynasty, this architectural marvel is known for its Indo-Saracenic style. Famous for its grand Dasara celebrations and spectacular evening illumination with 97,000 bulbs.",
+      highlights: ["Indo-Saracenic Architecture", "Evening Illumination", "Dasara Festival", "Royal Artifacts", "Durbar Hall", "Golden Throne"],
+      bestTime: "October to February",
+      nearbyAttractions: ["Chamundi Hills", "Brindavan Gardens", "St. Philomena's Church"],
+      duration: "1-2 hours",
+      accessibility: "Wheelchair accessible with assistance",
+      languages: ["Kannada", "English", "Hindi", "Tamil"],
+      specialNotes: "Palace illuminated on Sundays and public holidays (7-8 PM). Special entry fees during Dasara."
     }
   ];
 
