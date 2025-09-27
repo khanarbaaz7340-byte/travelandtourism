@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -112,33 +112,28 @@ const ExpenseTracker = () => {
     }
   };
 
-  const getTotalExpenses = () => {
+  const totalExpenses = useMemo(() => {
     return expenses.reduce((total, expense) => total + expense.amount, 0);
-  };
+  }, [expenses]);
 
-  const getExpensesByCategory = () => {
-    const categoryTotals: { [key: string]: number } = {};
+  const categoryTotals = useMemo(() => {
+    const totals: { [key: string]: number } = {};
     expenses.forEach(expense => {
-      categoryTotals[expense.category] = (categoryTotals[expense.category] || 0) + expense.amount;
+      totals[expense.category] = (totals[expense.category] || 0) + expense.amount;
     });
-    return categoryTotals;
-  };
+    return totals;
+  }, [expenses]);
 
-  const getBudgetStatus = () => {
-    const categoryTotals = getExpensesByCategory();
-    const total = getTotalExpenses();
-    const remaining = budget.total - total;
-    const percentUsed = (total / budget.total) * 100;
+  const budgetStatus = useMemo(() => {
+    const remaining = budget.total - totalExpenses;
+    const percentUsed = (totalExpenses / budget.total) * 100;
     
     return {
-      total,
+      total: totalExpenses,
       remaining,
       percentUsed: Math.min(percentUsed, 100)
     };
-  };
-
-  const budgetStatus = getBudgetStatus();
-  const categoryTotals = getExpensesByCategory();
+  }, [totalExpenses, budget.total]);
 
   return (
     <div className="min-h-screen bg-background p-4">
@@ -398,7 +393,7 @@ const ExpenseTracker = () => {
                     <h4 className="font-semibold text-lg mb-2">Daily Average</h4>
                     <div className="text-2xl font-bold text-primary flex items-center justify-center">
                       <IndianRupee className="w-5 h-5" />
-                      {(getTotalExpenses() / 7).toFixed(0)}
+                      {(totalExpenses / 7).toFixed(0)}
                     </div>
                     <p className="text-sm text-muted-foreground">per day</p>
                   </div>
